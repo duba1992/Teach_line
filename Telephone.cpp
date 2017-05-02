@@ -19,6 +19,10 @@ void Person:: addSubscription(int size){
     cout<< "Enter birthday"<<endl;
     getline(cin,a.birthday);
     l.push_back(a);
+    ofstream fout("cpp.txt",ios_base::app);
+    fout<<a.x<<" Name: "<<a.name<<" number: "<<a.number<<" Birthday: "<<a.birthday<<endl;
+    fout.close();
+
     
 }
 void Person:: allDisplay(int size){
@@ -40,14 +44,15 @@ void Person::personDisplay(int choise, int size){
     a = *it;
     cout <<a.x<<" "<<"Name:"<< a.name << '\t' <<" Telephone: "<< a.number <<" Born: "<<a.birthday<<endl;
 }
-void ClearScreen()
-{
-    if (!cur_term)
-    {
-        int result;
-        setupterm( NULL, STDOUT_FILENO, &result );
-        if (result <= 0) return;
+void Person::deleteSubscription(int choise,int size){
+    list<Telephone>::iterator it = l.begin();
+    if (choise > size){
+        cout<<"This subscriber does not exist"<<endl;
+        return;
     }
     
-    putp( tigetstr( "clear" ) );
-};
+    advance(it,choise-1);
+    l.erase(it);
+    
+    
+}

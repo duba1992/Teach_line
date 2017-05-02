@@ -14,6 +14,8 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <ncurses.h>
+#include <fstream>
 using namespace std;
 class Person{
 private:struct Telephone{
@@ -30,10 +32,10 @@ private:struct Telephone{
     return a.x<b.x;
     }
 public:
-    void ClearScreen();
+
     void addSubscription(int size);
     void allDisplay(int size);
-    void deleteSubscription(int size);
+    void deleteSubscription(int choise,int size);
     void personDisplay(int choise, int size);
 };
 #endif /* Telephone_hpp */

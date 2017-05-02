@@ -12,6 +12,18 @@
 using namespace std;
 #include <unistd.h>
 #include <term.h>
+#include <fstream>
+void ClearScreen()
+{
+    if (!cur_term)
+    {
+        int result;
+        setupterm( NULL, STDOUT_FILENO, &result );
+        if (result <= 0) return;
+    }
+    
+    putp( tigetstr( "clear" ) );
+};
 
 
 int main(int argc, const char * argv[]) {
@@ -22,7 +34,7 @@ int main(int argc, const char * argv[]) {
     Person obj;
    
     do{
-        obj.ClearScreen();
+        ClearScreen();
       cout<<"Введите выбор\n1.Новый абонент\n2.Выбрать абонента\n3.Посмотреть всех\n4.Удалить абонента"<<endl;
     do{
     cin>>choise;
@@ -48,13 +60,19 @@ int main(int argc, const char * argv[]) {
     
         }
         case 4:{
+            cout<<"Enter number of Person"<<endl;
+            obj.allDisplay(size);
+            cin>>choise;
+            obj.deleteSubscription(choise, size);
             break;
         }
+        case 5:{
+            }
         default:
             break;
     }
     }while(program);
     
-    
+
 
 }
